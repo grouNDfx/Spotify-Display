@@ -31,18 +31,18 @@ spotify_info.config(font=(conf_font, conf_font_size,), background='#50505A', for
 spotify_info.pack(fill='both', expand=1, padx=conf_padding, ipadx=0, side='left')
 
 def update_song():
-	file = open('Snip.txt', encoding='utf8')
-	file_song = file.read()
-	if file_song == "":
-		spotify_info.config(text = 'No Song')
-		window_width = str(round(len('No Song') * conf_font_width) + (conf_padding*2 + conf_font_width))
-	else:
-		spotify_info.config(text = file_song)
-		window_width = str(round(len(file_song) * conf_font_width) + (conf_padding*2 + conf_font_width))
-	root.geometry(window_width + 'x' + window_height + '+' + horizontal_offset + '+' + verticle_offset)
-	file.close()
-	time.sleep(conf_update_frequency)
-	update_song()
+	while(1):
+		file = open('Snip.txt', encoding='utf8')
+		file_song = file.read()
+		if file_song == "":
+			spotify_info.config(text = 'No Song')
+			window_width = str(round(len('No Song') * conf_font_width) + (conf_padding*2 + conf_font_width))
+		else:
+			spotify_info.config(text = file_song)
+			window_width = str(round(len(file_song) * conf_font_width) + (conf_padding*2 + conf_font_width))
+		root.geometry(window_width + 'x' + window_height + '+' + horizontal_offset + '+' + verticle_offset)
+		file.close()
+		time.sleep(conf_update_frequency)
 
 thread = Thread(target = update_song)
 thread.setDaemon(True)
